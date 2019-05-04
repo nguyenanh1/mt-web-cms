@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 22, 2019 11:53:08 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="pojos.Ticket" table="ticket" catalog="movie_cinema" optimistic-lock="version">
+        <id name="idTicket" type="java.lang.Integer">
+            <column name="id_ticket" />
+            <generator class="identity" />
+        </id>
+        <property name="status" type="java.lang.Integer">
+            <column name="status" />
+        </property>
+        <property name="price" type="java.lang.Integer">
+            <column name="price" />
+        </property>
+        <property name="idMovietime" type="java.lang.Integer">
+            <column name="id_movietime" />
+        </property>
+        <property name="idZoomDetail" type="java.lang.Integer">
+            <column name="id_zoom_detail" />
+        </property>
+        <property name="createBy" type="java.lang.Integer">
+            <column name="create_by" />
+        </property>
+        <property name="timeCreate" type="timestamp">
+            <column name="time_create" length="19" />
+        </property>
+        <property name="updateBy" type="java.lang.Integer">
+            <column name="update_by" />
+        </property>
+        <property name="timeUpdate" type="timestamp">
+            <column name="time_update" length="19" />
+        </property>
+    </class>
+</hibernate-mapping>

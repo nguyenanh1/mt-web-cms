@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
+    <!--    HomeServlet Mapping-->
+    <servlet>
+        <servlet-name>HomeController</servlet-name>
+        <servlet-class>controller.HomeController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>HomeController</servlet-name>
+        <url-pattern>/HomeController</url-pattern>
+    </servlet-mapping>
+   
+    <filter>
+        <filter-name>logFilter</filter-name>
+        <filter-class>fillter.DomainFilter</filter-class>
+    </filter>
+    
+    <filter-mapping>
+        <filter-name>logFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+    
+    <!--    JSP Mapping-->
+    <servlet>
+        <servlet-name>Login</servlet-name>
+        <jsp-file>/login.jsp</jsp-file>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>Login</servlet-name>
+        <url-pattern>/login</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>Home</servlet-name>
+        <jsp-file>/index.jsp</jsp-file>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>Home</servlet-name>
+        <url-pattern>/home</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>AddMovie</servlet-name>
+        <jsp-file>/add-movie.jsp</jsp-file>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>AddMovie</servlet-name>
+        <url-pattern>/add-movie</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>EditMovie</servlet-name>
+        <jsp-file>/edit-movie.jsp</jsp-file>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>EditMovie</servlet-name>
+        <url-pattern>/edit-movie</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>DetailMovie</servlet-name>
+        <jsp-file>/detail-movie.jsp</jsp-file>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>DetailMovie</servlet-name>
+        <url-pattern>/detail-movie</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>Movie</servlet-name>
+        <jsp-file>/movie.jsp</jsp-file>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>Movie</servlet-name>
+        <url-pattern>/movie</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>AddCategory</servlet-name>
+        <jsp-file>/add-category.jsp</jsp-file>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>AddCategory</servlet-name>
+        <url-pattern>/add-category</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>EditCategory</servlet-name>
+        <jsp-file>/edit-category.jsp</jsp-file>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>EditCategory</servlet-name>
+        <url-pattern>/edit-category</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>Category</servlet-name>
+        <jsp-file>/category.jsp</jsp-file>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>Category</servlet-name>
+        <url-pattern>/category</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>AddRoom</servlet-name>
+        <jsp-file>/add-room.jsp</jsp-file>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>AddRoom</servlet-name>
+        <url-pattern>/add-room</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>Room</servlet-name>
+        <jsp-file>/room.jsp</jsp-file>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>Room</servlet-name>
+        <url-pattern>/room</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>DetailRoom</servlet-name>
+        <jsp-file>/room-detail.jsp</jsp-file>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>DetailRoom</servlet-name>
+        <url-pattern>/room-detail</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>UserAdmin</servlet-name>
+        <jsp-file>/user-admin.jsp</jsp-file>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>UserAdmin</servlet-name>
+        <url-pattern>/user-admin</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>AddUserAdmin</servlet-name>
+        <jsp-file>/add-user-admin.jsp</jsp-file>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>AddUserAdmin</servlet-name>
+        <url-pattern>/add-user-admin</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>AddMovieTime</servlet-name>
+        <jsp-file>/add-movie-time.jsp</jsp-file>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>AddMovieTime</servlet-name>
+        <url-pattern>/add-time</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>MovieTime</servlet-name>
+        <jsp-file>/movie-time.jsp</jsp-file>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>MovieTime</servlet-name>
+        <url-pattern>/time-movie</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>UserMobile</servlet-name>
+        <jsp-file>/user-mobile.jsp</jsp-file>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>UserMobile</servlet-name>
+        <url-pattern>/user-mobile</url-pattern>
+    </servlet-mapping>
+    
+    <session-config>
+        <session-timeout>
+            30
+        </session-timeout>
+    </session-config>
+    <welcome-file-list>
+        <welcome-file>index.jsp</welcome-file>
+    </welcome-file-list>
+    <error-page>
+        <error-code>404</error-code>
+        <location>/404page.jsp</location>
+    </error-page>
+</web-app>

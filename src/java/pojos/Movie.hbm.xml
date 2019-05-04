@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 22, 2019 11:53:08 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="pojos.Movie" table="movie" catalog="movie_cinema" optimistic-lock="version">
+        <id name="id" type="int">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <property name="status" type="java.lang.Integer">
+            <column name="status" />
+        </property>
+        <property name="name" type="string">
+            <column name="name" length="45" />
+        </property>
+        <property name="partTime" type="java.lang.Integer">
+            <column name="part_time" />
+        </property>
+        <property name="time" type="java.lang.Integer">
+            <column name="time" />
+        </property>
+        <property name="director" type="string">
+            <column name="director" length="50" />
+        </property>
+        <property name="contain" type="string">
+            <column name="contain" length="2000" />
+        </property>
+        <property name="trailer" type="string">
+            <column name="trailer" length="200" />
+        </property>
+        <property name="thumb" type="string">
+            <column name="thumb" length="200" />
+        </property>
+        <property name="imageUrl" type="string">
+            <column name="image_url" length="200" />
+        </property>
+        <property name="actor" type="string">
+            <column name="actor" length="400" />
+        </property>
+        <property name="old" type="java.lang.Integer">
+            <column name="old" />
+        </property>
+        <property name="view" type="java.lang.Long">
+            <column name="view" />
+        </property>
+        <property name="createBy" type="java.lang.Integer">
+            <column name="create_by" />
+        </property>
+        <property name="timeCreate" type="timestamp">
+            <column name="time_create" length="19" />
+        </property>
+        <property name="updateBy" type="java.lang.Integer">
+            <column name="update_by" />
+        </property>
+        <property name="timeUpdate" type="timestamp">
+            <column name="time_update" length="19" />
+        </property>
+    </class>
+</hibernate-mapping>
