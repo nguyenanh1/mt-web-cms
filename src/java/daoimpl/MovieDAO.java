@@ -86,7 +86,11 @@ public class MovieDAO implements IMovieDAO {
 
     @Override
     public Movie findMovieById(Integer id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       String hql = "FROM Movie m where m.id = :id";
+       Map<String,Object> map = new HashMap<>();
+       map.put("id", id);
+       Movie movie = (Movie) DAOUtil.getObeject(hql, map);
+       return movie;
     }
 
     @Override

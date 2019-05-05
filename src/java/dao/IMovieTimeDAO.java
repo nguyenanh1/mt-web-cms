@@ -17,4 +17,5 @@ public interface IMovieTimeDAO {
     int update(Movietime movietime);
     int delete(Movietime movietime);
     List<Movietime> findByIdRoom(Integer idRoom, Integer dateStart);
+    List<Movietime> checkMovieTime(Integer idRoom, Integer dateStart, Integer timeStart, Integer timeEnd);
 }

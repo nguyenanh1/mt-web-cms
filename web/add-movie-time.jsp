@@ -69,7 +69,7 @@
                                     </div>
                                     <div class="form-group col-sm-12 col-md-7 col-lg-4">
                                         <label for="exampleFormControlInput1">Ngày chiếu</label>
-                                        <input type="date" name="date" class="form-control" required="" id="exampleFormControlInput1" placeholder="">
+                                        <input type="date" name="date" class="form-control" required="" id="inputDate" placeholder="">
                                     </div>
                                 </div>
                                 <div class="row">
@@ -92,7 +92,7 @@
                                 <div class="row">
                                     <div class="form-group col-sm-12 col-md-12 col-lg-6">
                                         <label for="exampleFormControlInput1">Giá vé</label>
-                                        <input type="number" name="time" class="form-control" min="1000" required="" title="Giá vé phải lớn hơn 1000" id="exampleFormControlInput1" placeholder="(VND)">
+                                        <input type="number" name="price" class="form-control" min="1000" required="" title="Giá vé phải lớn hơn 1000" id="exampleFormControlInput1" placeholder="(VND)">
                                     </div>
                                 </div>
                                 <button class="btn btn-primary" type="submit">Thêm</button>
@@ -107,5 +107,60 @@
         <jsp:include page="scrolltotop.jsp"/>
         <jsp:include page="logout.jsp"/>
         <jsp:include page="javascript.jsp"/>
+
+        <script>
+            $(document).ready(function () {
+                let now = new Date();
+                var tomorrow = new Date(now.getTime() + (24 * 60 * 60 * 1000));
+                let year = tomorrow.getFullYear();
+                let day = tomorrow.getDate();
+                let month = tomorrow.getMonth() + 1;
+                if (day < 10) {
+                    day = '0' + day;
+                }
+                if (month < 10) {
+                    month = '0' + month;
+                }
+                var today = year + '-' + month + '-' + day;
+                $('#inputDate').val(today);
+                $('#inputDate').attr('min', today);
+
+                var max = new Date(now.getTime() + (14 * 24 * 60 * 60 * 1000));
+                year = max.getFullYear();
+                day = max.getDate();
+                month = max.getMonth()+1;
+                if (day < 10) {
+                    day = '0' + day;
+                }
+                if (month < 10) {
+                    month = '0' + month;
+                }
+                var maxS = year + '-' + month + '-' + day;
+                $('#inputDate').attr('max', maxS);
+                $('#inputDate').attr('title', 'Bạn chỉ có thể tạo lịch chiếu trong khoảng từ ' + today + ' đến '+ maxS)   ;
+            });
+
+            let mess = GetURLParameter("message");
+            switch (mess) {
+                case "success":
+                    swal("Thông báo", "Thêm thành công", "success");
+                    break;
+                case "fail":
+                    swal("Thông báo", "Có lỗi trong quá trình tạo vé");
+                    break;
+                case "ZOOMNOTUSE":
+                    swal("Thông báo", "Phòng không tồn tại");
+                    break;
+                case "MOVIETIMEEXIXTS":
+                    swal("Thông báo", "Phòng này đã được sử dụng vào thời điểm bạn tạo");
+                    break;
+                case "ZOOMNOTEXIST":
+                    swal("Thông báo", "Phòng không tồn tại");
+                    break;
+                case "MOVIENOTEXIST":
+                    swal("Thông báo", "Phim này không tồn tại");
+                    break;
+            }
+        </script>
     </body>
 </html>

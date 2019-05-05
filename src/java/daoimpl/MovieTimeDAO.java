@@ -6,11 +6,14 @@
 package daoimpl;
 
 import dao.IMovieTimeDAO;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import pojos.Movietime;
+import util.DAOUtil;
 import util.HibernateUtil;
 
 /**
@@ -33,17 +36,17 @@ public class MovieTimeDAO implements IMovieTimeDAO{
     
     @Override
     public int add(Movietime movietime) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return DAOUtil.save(movietime);
     }
 
     @Override
     public int update(Movietime movietime) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+         return DAOUtil.update(movietime);
     }
 
     @Override
     public int delete(Movietime movietime) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return DAOUtil.delete(movietime);
     }
 
     @Override
@@ -63,6 +66,22 @@ public class MovieTimeDAO implements IMovieTimeDAO{
             trans.rollback();
             return null;
         }
+    }
+
+    @Override
+    public List<Movietime> checkMovieTime(Integer idRoom, Integer dateStart, Integer timeStart,Integer timeEnd) {
+        String hql = "From Movietime m where m.idRoom = :idRoom and m.dateStart = :dateStart and m.timeStart>= :timeStart and m.timeStart< :timeEnd";
+        Map<String,Object> map = new HashMap<String, Object>();
+        map.put("idRoom", idRoom);
+        map.put("dateStart", dateStart);
+        map.put("timeStart", timeStart);
+        map.put("timeEnd", timeEnd);
+        List<Movietime> mMovieTimes = DAOUtil.getList(hql, map);
+        return mMovieTimes;
+    }
+    
+    public static void main(String[] args) {
+        
     }
     
 }

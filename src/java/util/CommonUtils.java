@@ -17,7 +17,7 @@ import java.util.List;
  */
 public class CommonUtils {
 
-    public static String ip = "http://192.168.100.30/";
+    public static String ip = "http://192.168.100.101/";
 
     public static int timeout = 1000 * 15 * 60;
 
@@ -77,13 +77,43 @@ public class CommonUtils {
 
     public static int convertTimeStart(String timestart) {
         String[] list = timestart.split(":");
-        int hh = Integer.parseInt(list[0]);
-        int mm = Integer.parseInt(list[1]);
-        return hh * 100 + mm;
+        String hh = list[0];
+        String mm = list[1];
+        int timestartI = -1;
+        try {
+            timestartI = Integer.parseInt(hh + mm);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return timestartI;
     }
 
-    public static String decimalFormat(Integer decimal){
-        DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
-        return decimalFormat.format(decimal);
+    public static Integer parseInteger(String s) {
+        try {
+            return Integer.parseInt(s);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public static Integer getTimeEnd(int timeStart, int duration) {
+        int hh = timeStart / 100;
+        int mm = timeStart % 100;
+        int hourDuraion = duration/60;
+        int minDuration = duration%60;
+        
+        hh = hh+hourDuraion;
+        mm = mm+minDuration;
+        return hh*100+mm;
+    }
+
+//    public static String decimalFormat(Integer decimal){
+//        DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
+//        return decimalFormat.format(decimal);
+//    }
+    
+    public static void main(String[] args) {
+//        System.out.println(CommonUtils.getTimeEnd(2015, 120));
     }
 }
