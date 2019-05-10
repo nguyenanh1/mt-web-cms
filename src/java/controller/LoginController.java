@@ -59,6 +59,7 @@ public class LoginController extends HttpServlet {
                 session.setMaxInactiveInterval(60*15*1000);
                 session.setAttribute(CodeDefine.USER_ID, mUserService.findByUser(username).getId());
                 session.setAttribute(CodeDefine.TOKEN, result);
+                session.setAttribute(CodeDefine.DISPLAY_NAME, mUserService.findByUser(username).getDisplayName());
                 response.sendRedirect(request.getContextPath()+"/home");
                 break;
         }

@@ -12,4 +12,5 @@ package common;
 public class CodeDefine {
     public final static String USER_ID = "user_id";
     public final static String TOKEN = "token";
+    public final static String DISPLAY_NAME = "display_name";
 }

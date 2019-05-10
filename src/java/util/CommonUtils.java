@@ -34,6 +34,23 @@ public class CommonUtils {
         }
         return "";
     }
+    
+    public static String converTime(Integer time){
+        if(time!=null){
+            int hh= time/100;
+            int mm = time%100;
+            String hhS = String.valueOf(hh);
+            String mmS = String.valueOf(mm);
+            if(hh<10){
+                hhS = "0"+hhS;
+            }
+            if(mm<10){
+                mmS = "0"+mmS;
+            }
+            return hhS+":"+mmS;
+        }
+        return "";
+    }
 
     public static Integer getPartDate(Date date) {
         SimpleDateFormat mFormat = new SimpleDateFormat("yyyyMMdd");
@@ -96,6 +113,15 @@ public class CommonUtils {
             return null;
         }
     }
+    
+    public static Long parseLong(String s) {
+        try {
+            return Long.parseLong(s);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 
     public static Integer getTimeEnd(int timeStart, int duration) {
         int hh = timeStart / 100;
@@ -108,12 +134,21 @@ public class CommonUtils {
         return hh*100+mm;
     }
 
-//    public static String decimalFormat(Integer decimal){
-//        DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
-//        return decimalFormat.format(decimal);
-//    }
-    
-    public static void main(String[] args) {
-//        System.out.println(CommonUtils.getTimeEnd(2015, 120));
+    public static String decimalFormat(Integer decimal){
+        DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
+        return decimalFormat.format(decimal);
     }
+    
+    public static String getStatusTicket(int i){
+        if(i==1){
+            return "Ghế trống";
+        }else if(i==2){
+            return "Ghế đã bán";
+        }else if(i==3){
+            return "Ghế đang được chọn";
+        }else{
+            return null;
+        }
+    }
+    
 }

@@ -6,11 +6,14 @@
 package daoimpl;
 
 import dao.IUserAdminDAO;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import pojos.UserAdmin;
+import util.DAOUtil;
 import util.HibernateUtil;
 
 /**
@@ -110,20 +113,25 @@ public class UserAdminDAO implements IUserAdminDAO {
 
     @Override
     public UserAdmin findById(Integer id) {
-        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-        Transaction trans = session.beginTransaction();
-        try {
-            String hql = "FROM UserAdmin u where u.id = :id";
-            Query q = session.createQuery(hql);
-            q.setParameter("id", id);
-            UserAdmin u = (UserAdmin) q.uniqueResult();
-            trans.commit();
-            return u;
-        } catch (Exception e) {
-            trans.rollback();
-            e.printStackTrace();
-            return null;
-        }
+//        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+//        Transaction trans = session.beginTransaction();
+//        try {
+//            String hql = "FROM UserAdmin u where u.id = :id";
+//            Query q = session.createQuery(hql);
+//            q.setParameter("id", id);
+//            UserAdmin u = (UserAdmin) q.uniqueResult();
+//            trans.commit();
+//            return u;
+//        } catch (Exception e) {
+//            trans.rollback();
+//            e.printStackTrace();
+//            return null;
+//        }
+        String hql = "FROM UserAdmin u where u.id = :id";
+        Map<String,Object> map = new HashMap<>();
+        map.put("id", id);
+        UserAdmin u = (UserAdmin) DAOUtil.getObeject(hql, map);
+        return u;
     }
 
     public static void main(String[] args) {

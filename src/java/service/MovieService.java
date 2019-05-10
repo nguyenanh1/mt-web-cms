@@ -13,6 +13,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import model.MovieTimeMapping;
 import pojos.Movie;
 import pojos.Moviecategory;
 import util.CommonUtils;
@@ -22,7 +23,12 @@ import util.CommonUtils;
  * @author Asus
  */
 public class MovieService {
-
+    public static final Integer SUCCESS = 0;
+    public static final Integer MOVIE_NOT_EXIST=1;
+    public static final Integer FAIL = 2;
+    
+    
+    
     private static MovieService instance;
 
     private IMovieDAO mMovieDAO;
@@ -84,6 +90,33 @@ public class MovieService {
         } else {
             return 0;
         }
-
     }
+        
+    public Movie findMovieById(Integer id){
+        Movie m = mMovieDAO.findMovieById(id);
+        return m;
+    }
+
+    public Integer lock(Integer id, Integer idUser) {
+        Movie m = findMovieById(id);
+        if(m==null){
+            return MOVIE_NOT_EXIST;
+        }else{
+            if(m.getStatus()==2){
+                 m.setStatus(1);
+            }else{
+                 m.setStatus(2);
+            }
+            int update = mMovieDAO.update(m);
+            if(update==1){
+                return SUCCESS;
+            }else{
+                return FAIL;
+            }
+        }
+    }
+    
+    
+   
+    
 }

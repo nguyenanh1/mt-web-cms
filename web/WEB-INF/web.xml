@@ -191,6 +191,25 @@
         <url-pattern>/user-mobile</url-pattern>
     </servlet-mapping>
     
+    <servlet>
+        <servlet-name>Ticket</servlet-name>
+        <jsp-file>/ticket.jsp</jsp-file>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>Ticket</servlet-name>
+        <url-pattern>/ticket</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>TicketDetail</servlet-name>
+        <jsp-file>/ticket-detail.jsp</jsp-file>
+    </servlet>
+    
+    <servlet-mapping>
+        <servlet-name>TicketDetail</servlet-name>
+        <url-pattern>/ticket-detail</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30

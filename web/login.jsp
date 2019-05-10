@@ -15,8 +15,8 @@
         <meta name="description" content="">
         <meta name="author" content="">
 
-        <title>CGV CMS - Login</title>
 
+        <title>VENUS CMS - Login</title>
         <jsp:include page="logo.jsp"/>
 
         <!-- Custom fonts for this template-->
@@ -33,7 +33,7 @@
                     <form method="post" action="LoginController">
                         <div class="form-group">
                             <div class="form-label-group">
-                                <input type="text" name="username" id="inputEmail" value="" class="form-control" placeholder="Tên tài khoản" required="required" autofocus="autofocus">
+                                <input type="text" name="username" id="inputEmail" value="" class="form-control" placeholder="Tên tài khoản" required="required">
                                 <label for="inputEmail">Tên tài khoản</label>
                             </div>
                         </div>
@@ -41,14 +41,6 @@
                             <div class="form-label-group">
                                 <input type="password" name="password" value="" id="inputPassword" class="form-control" placeholder="Mật khẩu" required="required">
                                 <label for="inputPassword">Mật khẩu</label>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="checkbox">
-                                <label>
-                                    <input type="checkbox" value="remember-me">
-                                    Ghi nhớ thông tin đăng nhập
-                                </label>
                             </div>
                         </div>
                         <div  id="fail2" class="d-none">

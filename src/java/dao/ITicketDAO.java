@@ -5,6 +5,8 @@
  */
 package dao;
 
+import java.util.List;
+import model.TicketMapping;
 import pojos.Ticket;
 
 /**
@@ -15,5 +17,6 @@ public interface ITicketDAO {
     int save(Ticket ticket);
     int update(Ticket ticket);
     int delete(Ticket ticket);
-    
+//    List<Ticket> getListTicket(int time, int idMovie);
+    List<Ticket> findListTicket(int movieTime);
 }

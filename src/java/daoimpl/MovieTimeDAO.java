@@ -79,9 +79,31 @@ public class MovieTimeDAO implements IMovieTimeDAO{
         List<Movietime> mMovieTimes = DAOUtil.getList(hql, map);
         return mMovieTimes;
     }
-    
-    public static void main(String[] args) {
-        
+
+    @Override
+    public List<Movietime> findAll() {
+        String hql = "From Movietime m ORDER BY m.timeCreate DESC";
+        List<Movietime> mMovieTime = DAOUtil.getList(hql);
+        return mMovieTime;
+    }
+
+    @Override
+    public List<Movietime> findByIdMovie(Integer idMovie, Integer dateStart) {
+        String hql = "From Movietime m where m.idMovie = :idMovie and m.dateStart= :dateStart";
+        Map<String,Object> map = new HashMap<String, Object>();
+        map.put("idMovie", idMovie);
+        map.put("dateStart", dateStart);
+        List<Movietime> mMovieTimes = DAOUtil.getList(hql, map);
+        return mMovieTimes;
+    }
+
+    @Override
+    public Movietime findById(int idMovieTime) {
+        String hql  = "From Movietime m where m.id = :id";
+        Map<String,Object> map = new HashMap<>();
+        map.put("id", idMovieTime);
+        Movietime m = (Movietime) DAOUtil.getObeject(hql, map);
+        return m;
     }
     
 }

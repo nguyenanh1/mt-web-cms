@@ -123,10 +123,4 @@ public class MovieDAO implements IMovieDAO {
         map.put("partdate",partdate);
         return DAOUtil.getList(hql, map);
     }
-
-    public static void main(String[] args) {
-        IMovieDAO movieDAO = MovieDAO.getInstance();
-        System.out.println(movieDAO.getMovieIsShowing(20190504).size());
-    }
-
 }

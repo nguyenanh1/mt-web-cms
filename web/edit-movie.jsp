@@ -4,6 +4,15 @@
     Author     : Asus
 --%>
 
+<%@page import="service.CategoryService"%>
+<%@page import="pojos.Category"%>
+<%@page import="pojos.Category"%>
+<%@page import="java.util.List"%>
+<%@page import="java.util.List"%>
+<%@page import="util.CommonUtils"%>
+<%@page import="util.CustomToken"%>
+<%@page import="service.MovieService"%>
+<%@page import="pojos.Movie"%>
 <%@page import="common.CodeDefine"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -17,10 +26,29 @@
 
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <jsp:include page="logo.jsp"/>
-        <title>CGV - CMS</title>
+        <title>VENUS - CMS</title>
         <jsp:include page="css.jsp"/>
     </head>
     <body id="page-top">
+        <%
+            Movie movie = null;
+            Integer idMovie = null;
+            if (request.getParameter("id") != null) {
+                idMovie = CommonUtils.parseInteger(request.getParameter("id"));
+            }
+            if (idMovie != null) {
+                movie = MovieService.getInstance().findMovieById(idMovie);
+            }
+            int role;
+            CustomToken mToken;
+            if (session.getAttribute(CodeDefine.TOKEN) != null) {
+                String token = session.getAttribute(CodeDefine.TOKEN).toString();
+                mToken = new CustomToken(token);
+                role = mToken.getRole();
+            } else {
+                role = -1;
+            }
+        %> 
         <jsp:include page="header-top.jsp"/>
         <div id="wrapper">
             <jsp:include page="menu.jsp"/>
@@ -34,18 +62,34 @@
                         <li class="breadcrumb-item">
                             <a href="movie">Danh sách phim</a>
                         </li>
-                        <li class="breadcrumb-item active">Chạy ngay đi</li>
+                        <li class="breadcrumb-item active"><%=(movie == null ? "404 NOT FOUND" : movie.getName())%></li>
                     </ol>
                     <div class="card mb-3">
                         <div class="card-header">
                             <i class="fas fa-edit"></i>
                             Sửa thông tin phim</div>
                         <div class="card-body">
+                            <%
+                                if (role == 3) {
+                            %>
+                            <div class="alert alert-danger" role="alert">
+                                Tài khoản của bạn không có quyền này. Trở về trang <a href="movie" class="alert-link">danh sách phim</a>
+                            </div>
+                            <%
+                            } else {
+                                if (movie == null) {
+                            %>
+                            <p>404 NOT FOUND! Không tìm thấy dữ liệu.</p>
+                            <%
+                            } else {
+                                List<Category> mListCate = CategoryService.getInstance().getAllCate();
+
+                            %>
                             <form>
                                 <div class="row ">
                                     <div class="form-group col-sm-12 col-lg-5 col-md-5">
                                         <div class="form-label-group">
-                                            <input type="text" name="username" id="inputEmail" class="form-control" placeholder="Tên tài khoản" required="required" autofocus="autofocus">
+                                            <input type="text" name="username" id="inputEmail" class="form-control" placeholder="Tên tài khoản" required="required" value="<%=movie.getName()%>">
                                             <label for="inputEmail">Tên Phim</label>
                                         </div>
 
@@ -53,10 +97,10 @@
                                     <div class="form-group col-sm-12 col-lg-2 col-md-5">
                                         <select class="form-control" id="exampleFormControlSelect1">
                                             <option value="">Độ tuổi</option>
-                                            <option value="0">0</option>
-                                            <option value="13">13</option>
-                                            <option value="15">15</option>
-                                            <option value="18">18</option>
+                                            <option <%=(movie.getOld()==0? "selected":"") %> value="0">0</option>
+                                            <option <%=(movie.getOld()==13? "selected":"") %> value="13">13</option>
+                                            <option <%=(movie.getOld()==15? "selected":"") %> value="15">15</option>
+                                            <option <%=(movie.getOld()==18? "selected":"") %> value="18">18</option>
                                         </select>
                                     </div>
                                 </div>
@@ -69,25 +113,24 @@
                                     </div>
                                     <div class="form-group col-sm-12 col-lg-2 col-md-5">
                                         <div class="form-label-group">
-                                            <input type="number" name="username" id="inputTime" class="form-control" placeholder="Thời lượng (Phút)" required="required">
+                                            <input type="number" name="time" id="inputTime" value="<%=movie.getTime( )%>" class="form-control" placeholder="Thời lượng (Phút)" required="required">
                                             <label for="inputTime">Thời lượng</label>
                                         </div>
                                     </div>
                                 </div>
-                                 <div class="row form-group">
+                                <div class="row form-group">
                                     <div class="col-sm-12 col-lg-7 col-md-5">
-                                        <select class="form-control" id="exampleFormControlSelect1" multiple="multiple">
-                                            <option value="0">0</option>
-                                            <option value="13">13</option>
-                                            <option value="15">15</option>
-                                            <option value="18">18</option>
+                                        <select class="form-control" name="cate" id="exampleFormControlSelect1" required multiple="multiple">
+                                            <% for (Category cate : mListCate) {%>
+                                            <option value="<%=cate.getId()%>"><%=cate.getName()%></option>
+                                            <%}%>
                                         </select>
                                     </div>
                                 </div>
                                 <div class="row ">
                                     <div class="form-group col-sm-12 col-lg-7 col-md-5">
                                         <div class="form-label-group">
-                                            <input type="text" name="username" id="inputDirector" class="form-control" placeholder="Đạo diễn">
+                                            <input type="text" name="director" id="inputDirector" class="form-control" value="<%=movie.getDirector()%>" placeholder="Đạo diễn">
                                             <label for="inputDirector">Đạo diễn</label>
                                         </div>
                                     </div>
@@ -95,7 +138,7 @@
                                 <div class="row ">
                                     <div class="form-group col-sm-12 col-lg-7 col-md-5">
                                         <div class="form-label-group">
-                                            <input type="text" name="username" id="inputActor" class="form-control" placeholder="Diễn viên">
+                                            <input type="text" name="actor" id="inputActor" class="form-control" value="<%=movie.getActor()%>" placeholder="Diễn viên">
                                             <label for="inputActor">Diễn viên</label>
                                         </div>
                                     </div>
@@ -103,7 +146,7 @@
                                 <div class="row ">
                                     <div class="form-group col-sm-12 col-lg-7 col-md-5">
                                         <div class="form-label-group">
-                                            <input type="text" name="username" id="inputTrailer" class="form-control" placeholder="Trailer">
+                                            <input type="text" name="trailer" value="<%=movie.getTrailer()%>" id="inputTrailer" class="form-control" placeholder="Trailer">
                                             <label for="inputTrailer">Trailer</label>
                                         </div>
                                     </div>
@@ -111,27 +154,30 @@
                                 <div class="row ">
                                     <div class="form-group col-sm-12 col-lg-7 col-md-5">
                                         <div class="form-label-group">
-                                            <input type="file" name="username" id="inputThumb" class="form-control" placeholder="Thumb">
+                                            <input type="file" name="thumb"  id="inputThumb" class="form-control" placeholder="Thumb">
                                             <label for="inputThumb">Thumb</label>
+                                            <img src="<%=(CommonUtils.ip+movie.getThumb())%>" width="160px" height="237px"/>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row ">
                                     <div class="form-group col-sm-12 col-lg-7 col-md-5">
                                         <div class="form-label-group">
-                                            <input type="file" name="username" id="inputImage" class="form-control" placeholder="Ảnh">
+                                            <input type="file" name="image" src="<%=(CommonUtils.ip+movie.getThumb())%>" id="inputImage" class="form-control" placeholder="Ảnh">
                                             <label for="inputImage">Ảnh</label>
+                                            <img src="<%=(CommonUtils.ip+movie.getThumb())%>" width="175px" height="260px"/>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="inputContent">Nội dung</label>
-                                    <textarea class="form-control" id="inputContent" rows="5" id="comment"></textarea>
+                                    <textarea class="form-control" name="contain" id="inputContent" rows="5" id="comment"><%=movie.getContain() %></textarea>
                                 </div>
                                 <button class="btn btn-primary" type="submit">Đăng nhập</button>
-                                <button class="btn btn-danger" style="margin-left: 10">Hủy</button>
+                                <button class="btn btn-danger" style="margin-left: 10px">Hủy</button>
                         </div>
-
+                        <%}
+                            }%>
                         </form>
                     </div>
                 </div>

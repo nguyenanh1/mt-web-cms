@@ -23,7 +23,7 @@
 
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <jsp:include page="logo.jsp"/>
-        <title>CGV - CMS</title>
+        <title>VENUS - CMS</title>
         <jsp:include page="css.jsp"/>
     </head>
     <body id="page-top">
@@ -56,7 +56,7 @@
                             <i class="fas fa-table"></i>
                             Danh sách phim
 
-                            <a href="add-movie" class="btn btn-primary <%=(role==3? "disabled": "")%>" style="margin-left: auto">Thêm phim</a>
+                            <a href="add-movie" class="btn btn-primary <%=(role == 3 ? "disabled" : "")%>" style="margin-left: auto">Thêm phim</a>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -80,15 +80,15 @@
                                         %>    
                                         <tr>
                                             <td><%=mMovie.getName()%></td>
-                                            <td><img src="<%=(CommonUtils.ip+mMovie.getThumb())%>" width="160" height="237"/></td>
+                                            <td><img src="<%=(CommonUtils.ip + mMovie.getThumb())%>" width="160" height="237"/></td>
                                             <td><%=CommonUtils.convertDate(mMovie.getPartTime())%></td>
                                             <td><%=(mMovie.getTime() == null ? "" : mMovie.getTime().toString())%></td>
                                             <td><%=mMovie.getView()%></td>
                                             <td class="text-center">
                                                 <a title="Chi tiết" href="detail-movie?id=<%=mMovie.getId()%>" class="mr10 btn btn-info"><i data-v-1f4de138="" class="fas fa-info-circle"></i></a>
-                                                <a title="Sửa phim" href="edit-movie?id=1" class="mr10 btn btn-success <%=(role==3? "disabled": "")%>"><i class="fas fa-edit"></i></a>
-                                                <a href="#" title="Hủy kích hoạt" class="btn btn-warning  <%=(role==3? "disabled": "")%>"><i data-v-845e856c="" class="fas fa-lock "></i></a>
-                                                <a title="Xóa phim" href="MovieController?action=del" class="mr10 btn btn-danger <%=(role==3? "disabled": "")%>"><i data-v-1f4de138="" class="fas fa-trash"></i></a>
+                                                <a   title="Sửa phim" href="edit-movie?id=1" class="mr10 btn btn-success <%=(role == 3 ? "disabled" : "")%>"><i class="fas fa-edit"></i></a>
+                                                <a href="#" data-id="<%=mMovie.getId()%>" title="<%=(mMovie.getStatus()==1?"Ngừng kinh doanh":"Kinh doanh") %>" class="btn-lock btn btn-warning  <%=(role == 3 ? "disabled" : "")%>"><i class="fas <%=(mMovie.getStatus()==1?"fa-lock":"fa-unlock" )%> fa-lock "></i></a>
+                                                <a title="Xóa phim" href="MovieController?action=del" class="mr10 btn btn-danger <%=(role == 3 ? "disabled" : "")%>"><i data-v-1f4de138="" class="fas fa-trash"></i></a>
                                             </td>
                                         </tr>
 
@@ -102,14 +102,49 @@
                             </div>
                         </div>
                         <div class="card-footer small text-muted"> 
-                            <%=("Dữ liệu lấy lúc " +CommonUtils.formatDate(new Date()))%>
+                            <%=("Dữ liệu lấy lúc " + CommonUtils.formatDate(new Date()))%>
                         </div>
                     </div>
                 </div> 
             </div>
         </div> 
+
         <jsp:include page="scrolltotop.jsp"/>
         <jsp:include page="logout.jsp"/>
         <jsp:include page="javascript.jsp"/>
+        <script>
+            $(document).ready(function () {
+                $('.btn-lock').click(function (event) {
+                    var $this = $(this);
+                    var dataT = $this.attr("data-id");
+
+                    $.ajax({
+                        url: 'LockMovieAjax',
+                        type: 'GET',
+                        contentType: 'application/json',
+                        dataType: 'json',
+                        data: {
+                            id: $this.attr("data-id")
+                        },
+                        success: function (data) {
+                            swal("Thông báo", "Xóa thành công", "success")
+                                    .then((value) => {
+                                        if (value) {
+                                            window.location.replace("movie");
+                                        }
+                                    });
+
+                            console.log(data.code);
+                        },
+                        error: function ()
+                        {
+                            alert("error");
+                        }
+                    });
+                });
+            });
+
+
+        </script>
     </body>
 </html>

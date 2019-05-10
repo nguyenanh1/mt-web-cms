@@ -24,7 +24,7 @@
 
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <jsp:include page="logo.jsp"/>
-        <title>CGV - CMS</title>
+        <title>VENUS - CMS</title>
         <jsp:include page="css.jsp"/>
     </head>
     <body>

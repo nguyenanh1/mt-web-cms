@@ -173,8 +173,4 @@ public class UserService {
             }
         }
     }
-
-    public static void main(String[] args) {
-        System.out.println(UserService.getInstance().getAll().size());
-    }
 }

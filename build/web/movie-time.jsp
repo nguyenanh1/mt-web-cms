@@ -4,6 +4,11 @@
     Author     : Asus
 --%>
 
+<%@page import="service.MovieTimeService"%>
+<%@page import="model.MovieTimeMapping"%>
+<%@page import="java.util.List"%>
+<%@page import="util.CommonUtils"%>
+<%@page import="java.util.Date"%>
 <%@page import="common.CodeDefine"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -17,7 +22,7 @@
 
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <jsp:include page="logo.jsp"/>
-        <title>CGV - CMS</title>
+        <title>VENUS - CMS</title>
         <jsp:include page="css.jsp"/>
     </head>
     <body id="page-top">
@@ -28,13 +33,68 @@
                 <div class="container-fluid">
                     <!-- Breadcrumbs-->
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item active">
+                        <li class="breadcrumb-item ">
                             <a href="home">Trang chủ</a>
                         </li>
-                        <li class="breadcrumb-item">Danh sách lịch chiếu</li>
+                        <li class="breadcrumb-item active">Danh sách lịch chiếu</li>
                     </ol>
-                    <div>
-                        
+                    <!-- DataTables Example -->
+                    <div class="card mb-3">
+                        <div class="card-header d-flex align-items-center" >
+                            <i class="fas fa-table"></i>
+                            Danh sách lịch chiếu
+
+                            <a href="add-time" class="btn btn-primary" style="margin-left: auto">Thêm lịch chiếu</a>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <th>Phim</th>
+                                            <th>Phòng</th>
+                                            <th>Giá vé gốc (VND)</th>
+                                            <th>Giờ chiếu</th>
+                                            <th>Ngày chiếu</th>
+                                            <th>Người thêm</th>
+                                            <th>Ngày thêm</th>
+                                            <th>Người sửa</th>
+                                            <th>Ngày sửa</th>
+                                            <th>Thao tác</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <%
+                                            List<MovieTimeMapping> mList = MovieTimeService.getIntance().getAll();
+                                            if (mList != null) {
+                                                for (MovieTimeMapping m : mList) {
+                                        %>
+                                        <tr>
+                                            <td><%=m.getIdMovie()%></td>
+                                            <td><%=m.getIdRoom()%></td>
+                                            <td><%=m.getPrice()%></td>
+                                            <td><%=m.getTimeStart()%></td>
+                                            <td><%=m.getDateStart()%></td>
+                                            <td><%=m.getCreateBy()%></td>
+                                            <td><%=m.getTimeCreate()%></td>
+                                            <td><%=m.getUpdateBy()%></td>
+                                            <td><%=m.getTimeUpdate()%></td>
+                                            <td>
+                                                <a title="Sửa lịch chiếu"  href="edit-movie?id=1" class="mr10 btn btn-success"><i class="fas fa-edit"></i></a>
+                                                <a title="Xóa lịch chiếu" href="#" class="mr10 btn btn-danger"><i class="fas fa-trash"></i></a>
+                                            </td>
+                                        </tr>
+                                        <%
+                                                }
+                                            }
+                                        %>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="card-footer small text-muted"> 
+                            <%=("Dữ liệu lấy lúc " + CommonUtils.formatDate(new Date()))%>
+                        </div>
                     </div>
                 </div>
                 <jsp:include page="footer.jsp"/>
@@ -43,5 +103,9 @@
         <jsp:include page="scrolltotop.jsp"/>
         <jsp:include page="logout.jsp"/>
         <jsp:include page="javascript.jsp"/>
+        <script>
+            
+            
+        </script>
     </body>
 </html>

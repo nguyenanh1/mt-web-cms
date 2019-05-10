@@ -6,5 +6,5 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<link rel="icon" href="https://www.cgv.vn/media/favicon/default/mst_icon_1_.ico" type="image/x-icon">
-<link rel="shortcut icon" href="https://www.cgv.vn/media/favicon/default/mst_icon_1_.ico" type="image/x-icon">
+<link rel="icon" href="img/icon-home.png" type="image/x-icon">
+<link rel="shortcut icon" href="img/icon-home.png" type="image/x-icon">
