@@ -17,7 +17,6 @@ import util.DAOUtil;
  * @author Asus
  */
 public class DetailTransactionDAO implements ITransactionDetailDAO{
-
     @Override
     public List<DetailTransaction> getList(int idTrans) {
         String hql = "From DetailTransaction dt where dt.idTransaction = :idTrans";

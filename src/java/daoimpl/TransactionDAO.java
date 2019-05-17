@@ -12,6 +12,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import pojos.Transaction;
+import util.CommonUtils;
 import util.DAOUtil;
 
 /**
@@ -34,6 +35,7 @@ public class TransactionDAO implements ITransactionDAO{
     @Override
     public  List<Transaction> getTrans(Date start, Date from) {
         String hql = "From Transaction t where t.time >= :start and t.time<= :from";
+        
         Map<String,Object> map = new HashMap<String, Object>();
         map.put("start",start);
         map.put("from", from);

@@ -127,7 +127,7 @@
                             id: $this.attr("data-id")
                         },
                         success: function (data) {
-                            swal("Thông báo", "Xóa thành công", "success")
+                            swal("Thông báo", "Thành công", "success")
                                     .then((value) => {
                                         if (value) {
                                             window.location.replace("movie");

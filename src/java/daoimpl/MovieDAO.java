@@ -57,7 +57,7 @@ public class MovieDAO implements IMovieDAO {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         Transaction trans = session.beginTransaction();
         try {
-            String hql = "FROM Movie m ORDER BY m.timeCreate";
+            String hql = "FROM Movie m ORDER BY m.timeCreate DESC";
             Query q = session.createQuery(hql);
             List<Movie> list = q.list();
             trans.commit();

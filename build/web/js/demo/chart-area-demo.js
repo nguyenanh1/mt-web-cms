@@ -4,7 +4,7 @@ Chart.defaults.global.defaultFontColor = '#292b2c';
 
 $(document).ready(function () {
     var labelGet = new Array();
-    var datagGet;
+    var datagGet = new Array();
     var now = new Date();
     var max = new Date(now.getTime() - (12 * 24 * 60 * 60 * 1000));
     $.ajax({
@@ -17,8 +17,9 @@ $(document).ready(function () {
             from: now.getTime()
         },
         success: function (data) {
-            for (var i = 0; i < data.labels.length; i++) {
-                labelGet.push(data.labels[i].label);
+            for (var i = 0; i < data.data.length; i++) {
+                labelGet.push(data.data[i].label);
+                datagGet.push(data.data[i].value);
             }
             var ctx = document.getElementById("myAreaChart");
             var myLineChart = new Chart(ctx, {
@@ -26,7 +27,7 @@ $(document).ready(function () {
                 data: {
                     labels: labelGet,
                     datasets: [{
-                            label: "Sessions",
+                            label: "Số lượng vé",
                             lineTension: 0.3,
                             backgroundColor: "rgba(2,117,216,0.2)",
                             borderColor: "rgba(2,117,216,1)",
@@ -37,7 +38,7 @@ $(document).ready(function () {
                             pointHoverBackgroundColor: "rgba(2,117,216,1)",
                             pointHitRadius: 50,
                             pointBorderWidth: 2,
-                            data: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
+                            data: datagGet
                         }]
                 },
                 options: {
@@ -52,11 +53,14 @@ $(document).ready(function () {
                                 ticks: {
                                     maxTicksLimit: 7
                                 }
+                            }],
+                        yAxes: [{
+                                ticks: {
+                                    stepSize: 2
+                                }
                             }]
-                    },
-                    legend: {
-                        display: false
                     }
+
                 }
             });
         },

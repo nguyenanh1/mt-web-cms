@@ -21,6 +21,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import service.MovieService;
+import service.TransactionService;
 import util.CommonUtils;
 
 /**
@@ -41,12 +42,13 @@ public class ReportAjax extends HttpServlet {
         while (start <= from) {
             JsonObject jtest = new JsonObject();
             jtest.addProperty("label", simpleDateFormat.format(new Date(start)));
+            jtest.addProperty("value", TransactionService.getInstance().getReport(start));
             ja.add(jtest);
             start = start + 24 * 60 * 60 * 1000;
         }
         jo.addProperty("code", 0);
         jo.addProperty("message", "Ok");
-        jo.add("labels", ja);
+        jo.add("data", ja);
         resp.getWriter().print(jo);
     }
 

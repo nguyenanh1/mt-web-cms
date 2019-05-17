@@ -96,20 +96,22 @@
                                         for (TicketMapping temp : mList) {
                                     %>
                                     <tr>
-                                        <td><%=CommonUtils.getStatusTicket(temp.getStatus())%></td>
-                                        <td><%=temp.getPrice()%></td>
-                                        <td><%=temp.getPosition()%></td>
-                                        <td><%=temp.getCreateBy()%></td>
-                                        <td><%=temp.getTimeCreate()%></td>
-                                        <td><%=temp.getUpdateBy()%></td>
-                                        <td><%=temp.getTimeUpdate() %></td>
-                                        <td>
-                                            
-                                        </td>
-                                    </tr>
-                                    <%
-                                        }
-                                    %>
+                                <form>
+                                    <td><%=CommonUtils.getStatusTicket(temp.getStatus())%></td>
+                                    <td><input style="text-align: right" value="<%=temp.getPrice()%>"/>VND</td>
+                                    <td><%=temp.getPosition()%></td>
+                                    <td><%=temp.getCreateBy()%></td>
+                                    <td><%=temp.getTimeCreate()%></td>
+                                    <td><%=temp.getUpdateBy()%></td>
+                                    <td><%=temp.getTimeUpdate()%></td>
+                                    <td class="text-center">
+                                        <button data-id="<%=(temp.getId() )%>" class="btn btn-outline-primary"><i class="fas fa-save"></i></button>
+                                    </td>
+                                </form>
+                                </tr>
+                                <%
+                                    }
+                                %>
                                 </tbody>
                             </table>
                         </div>

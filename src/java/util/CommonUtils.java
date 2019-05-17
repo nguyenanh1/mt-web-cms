@@ -17,7 +17,7 @@ import java.util.List;
  */
 public class CommonUtils {
 
-    public static String ip = "http://192.168.100.101/";
+    public static String ip = "http://192.168.43.140/";
 
     public static int timeout = 1000 * 15 * 60;
 
